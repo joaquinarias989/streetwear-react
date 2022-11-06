@@ -16,7 +16,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'react/button-has-type': 'error',
     'react/require-default-props': 'error',
-    'react/display-name': 'error',
+    'react/display-name': 'off',
     'newline-before-return': 'error',
     'import/newline-after-import': [
       'error',

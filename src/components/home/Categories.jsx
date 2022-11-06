@@ -11,6 +11,7 @@ const Categories = () => {
               alt="Percha de madera clara"
               width="100%"
               height="100%"
+              loading="lazy"
             />
             <Link
               className="btn-secundario"
@@ -26,6 +27,7 @@ const Categories = () => {
               alt="Percha de madera clara"
               width="100%"
               height="100%"
+              loading="lazy"
             />
             <Link
               className="btn-secundario"
@@ -41,6 +43,7 @@ const Categories = () => {
               alt="Percha de madera clara"
               width="100%"
               height="100%"
+              loading="lazy"
             />
             <Link
               className="btn-secundario"

@@ -96,7 +96,9 @@ function About () {
             src={logo}
             alt="Logo de la tienda StreetWear en color blanco y amarillo"
             width="100%"
-            height="100%" />
+            height="100%"
+            loading="lazy"
+            />
           <i className="fas fa-info"></i>
         </div>
       </div>

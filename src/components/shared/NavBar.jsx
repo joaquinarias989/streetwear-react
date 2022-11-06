@@ -4,7 +4,7 @@ import { HashLink } from 'react-router-hash-link'
 import { getCategories } from '../../services/categories'
 import logo from '../../assets/logo.svg'
 import Loading from './Loading'
-// import CartWidget from "./CartWidget";
+import CartWidget from '../cart/CartWidget'
 
 function NavBar () {
   const [loading, setLoading] = useState(true)
@@ -25,7 +25,9 @@ function NavBar () {
             <img
               src={logo}
               alt="Logo de la tienda StreetWear, en color blanco y amarillo"
-              width="130" />
+              width="130"
+              loading="lazy"
+            />
           </picture>
         </NavLink>
 
@@ -131,7 +133,7 @@ function NavBar () {
                 </li>
               </ul>
             </li>
-            {/* <CartWidget /> */}
+            <CartWidget />
           </ul>
         </div>
       </nav>

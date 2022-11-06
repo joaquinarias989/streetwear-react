@@ -42,7 +42,7 @@ function Footer () {
           </div>
           <p>&copy; 2022 Derechos Reservados</p>
 
-          <button onClick={scrollTop} aria-label='Ir al comienzo de la página' className='nav-icons'>
+          <button type='button' onClick={scrollTop} aria-label='Ir al comienzo de la página' className='nav-icons'>
             <i className='fas fa-arrow-up' />
           </button>
         </div>
