@@ -12,16 +12,21 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.4.3",
-    "react-router-hash-link": "2.4.3"
+    "react-router-hash-link": "2.4.3",
+    "sweetalert2": "^11.6.5",
+    "sweetalert2-react-content": "^5.0.7"
   },
   "devDependencies": {
     "@types/react": "18.0.22",
     "@types/react-dom": "18.0.7",
     "@vitejs/plugin-react": "2.2.0",
-    "eslint": "8.26.0",
+    "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "7.31.10",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.4.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.10",
     "prettier": "^2.7.1",
     "vite": "3.2.0"
   }

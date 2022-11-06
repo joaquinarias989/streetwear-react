@@ -172,7 +172,11 @@ select:-webkit-autofill:focus {
   display: flex;
   flex-direction: column;
 }
-
+.grid {
+  display: grid;
+  place-content: center;
+  place-items: center;
+}
 .algn-items-center {
   align-items: center;
 }
@@ -199,7 +203,7 @@ select:-webkit-autofill:focus {
 
 /*    TEXT & BACKGROUNDS    */
 .bg-bricks {
-  background: url(./img/bricks.webp);
+  background: url(./assets/bricks.webp);
 }
 
 .bg-light {
@@ -861,7 +865,7 @@ main.bg-bricks {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url(./img/welcome-garage-2.webp) center center fixed no-repeat;
+  background: url(./assets/welcome-garage-2.webp) center center fixed no-repeat;
   background-size: cover;
   border-bottom: 5px solid #ffda07;
   box-shadow: 0 0 40px #ffda077e;
@@ -1776,6 +1780,15 @@ main.bg-bricks {
   mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   animation: spinner-loader 1s infinite linear;
+}
+.spinner-sm {
+  width: 24px;
+  height: 24px;
+  background: radial-gradient(farthest-side, #ffda07 94%, #0000) top/5px 5px
+      no-repeat,
+    conic-gradient(#0000 30%, #ffda07);
+  mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
 }
 
 .spinner-container {
