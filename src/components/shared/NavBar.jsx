@@ -54,11 +54,13 @@ function NavBar () {
               </NavLink>
 
               <ul className="sub-menu sub-menu__categories bg-bricks">
-                {loading && (
+                {loading
+                  ? (
                   <div className="grid py-3">
                     <Loading box={false} size={'sm'} />
                   </div>
-                )}
+                    )
+                  : <>
                 {categories.map((category) => (
                   <li key={category.id}>
                     <NavLink
@@ -71,6 +73,17 @@ function NavBar () {
                     </NavLink>
                   </li>
                 ))}
+                <li key={'all'}>
+                    <NavLink
+                      to={'/Productos/Categorias'}
+                      className={({ isActive }) => isActive
+                        ? 'menu__link menu__link--active'
+                        : 'menu__link'}
+                    >
+                      Ver todas
+                    </NavLink>
+                  </li></>
+                  }
               </ul>
             </li>
             <li>
