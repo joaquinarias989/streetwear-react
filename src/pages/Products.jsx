@@ -18,72 +18,62 @@ const Products = () => {
   const { products, loading, loadingMoreProds, handleLoadMoreProds } = useProducts(undefined, category)
 
   return (
-    <section id="products" className="products container">
-      <div className="section__header row">
-        <div className="col-md-10">
-          <h1 className="title-primary">Productos</h1>
-          <ol className="breadcrumb">
+    <section id='products' className='products container'>
+      <div className='section__header row'>
+        <div className='col-md-10'>
+          <h1 className='title-primary'>Productos</h1>
+          <ol className='breadcrumb'>
             <li>
               <NavLink to={'/'}>Inicio</NavLink>
             </li>
-            {category
-              ? (
+            {category ? (
               <>
                 <li>
-                  <NavLink to="/Productos">Productos</NavLink>
+                  <NavLink to='/Productos'>Productos</NavLink>
                 </li>
                 <li>
-                  <NavLink to="/Productos/Categorias"> Categorías</NavLink>
+                  <NavLink to='/Productos/Categorias'> Categorías</NavLink>
                 </li>
                 <li>{category}</li>
               </>
-                )
-              : (
+            ) : (
               <li>Productos</li>
-                )}
+            )}
           </ol>
         </div>
       </div>
-      {loading
-        ? (
+      {loading ? (
         <Loading />
-          )
-        : products.length === 0
-          ? (
-        <div className="spinner-container">
+      ) : products.length === 0 ? (
+        <div className='spinner-container'>
           <h2>No tenemos {category || 'Productos'} en stock por el momento.</h2>
-          {category &&
-          <Link
-            to="/Productos"
-            className="position-relative text-overline px-3 mt-2 fw-bold"
-          >
-            Ver todos los Productos
-          </Link>}
+          {category && (
+            <Link to='/Productos' className='position-relative text-overline px-3 mt-2 fw-bold'>
+              Ver todos los Productos
+            </Link>
+          )}
         </div>
-            )
-          : (
+      ) : (
         <>
           <ProductsList prods={products} />
-          <div className="flex-row jc-center algn-items-center">
-            {loadingMoreProds
-              ? (
-              <button type='button' className="btn-principal" aria-label="Cargando" disabled>
-                <i className="fa-solid fa-spinner"></i> Cargando
+          <div className='flex-row jc-center algn-items-center'>
+            {loadingMoreProds ? (
+              <button type='button' className='btn-principal' aria-label='Cargando' disabled>
+                <i className='fa-solid fa-spinner'></i> Cargando
               </button>
-                )
-              : (
+            ) : (
               <button
                 type='submit'
-                className="btn-principal"
+                className='btn-principal'
                 onClick={handleLoadMoreProds}
-                aria-label="Cargar más productos"
+                aria-label='Cargar más productos'
               >
-                <i className="fas fa-plus"></i> Cargar más
+                <i className='fas fa-plus'></i> Cargar más
               </button>
-                )}
+            )}
           </div>
         </>
-            )}
+      )}
     </section>
   )
 }

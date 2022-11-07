@@ -9,13 +9,11 @@ const Product = () => {
   const prod = products[0]
 
   return (
-    <section className="product container" id="product">
-      <div className="section__header">
-        <h1 className="title-underlined position-relative">
-          {loading ? 'Cargando producto...' : prod.title}
-        </h1>
+    <section className='product container' id='product'>
+      <div className='section__header'>
+        <h1 className='title-underlined position-relative'>{loading ? 'Cargando producto...' : prod.title}</h1>
 
-        <ol className="breadcrumb">
+        <ol className='breadcrumb'>
           <li>
             <NavLink to={'/'}>Inicio</NavLink>
           </li>
@@ -25,14 +23,8 @@ const Product = () => {
           <li>
             <NavLink to={'/Productos/Categorias'}>Categorias</NavLink>
           </li>
-          <li>
-            {loading ||
-            <NavLink to={`/Productos/Categorias/${prod.category}`}>
-              {prod.category}
-            </NavLink>}
-          </li>
-          {loading ||
-          <li>{prod.title}</li>}
+          <li>{loading || <NavLink to={`/Productos/Categorias/${prod.category}`}>{prod.category}</NavLink>}</li>
+          {loading || <li>{prod.title}</li>}
         </ol>
       </div>
       {loading ? <Loading /> : <ProdDetail key={prod.id} prod={prod} />}

@@ -17,8 +17,7 @@ export const CartContextProvider = ({ children }) => {
   const SHIP_VALUE = 475
 
   useEffect(() => {
-    localStorage.getItem('cart') &&
-      setCart(JSON.parse(localStorage.getItem('cart')))
+    localStorage.getItem('cart') && setCart(JSON.parse(localStorage.getItem('cart')))
   }, [])
 
   useEffect(() => {
@@ -32,9 +31,7 @@ export const CartContextProvider = ({ children }) => {
 
   // calculate subtotal price of products in cart
   const subtotalPrice = cart
-    .map(
-      (item) => item.price * item.quantity.reduce((acc, cur) => acc + cur, 0)
-    )
+    .map((item) => item.price * item.quantity.reduce((acc, cur) => acc + cur, 0))
     .reduce((acc, cur) => acc + cur, 0)
 
   // calculate total price
@@ -113,7 +110,9 @@ export const CartContextProvider = ({ children }) => {
   const removeProd = (item, index) => {
     if (index !== -1 && index !== undefined) {
       item.quantity[index] = 0
-      if (item.quantity.reduce((acc, cur) => acc + cur, 0) > 0) { return setCart([...cart]) }
+      if (item.quantity.reduce((acc, cur) => acc + cur, 0) > 0) {
+        return setCart([...cart])
+      }
     }
 
     return setCart(cart.filter((p) => p.id !== item.id))
@@ -124,7 +123,9 @@ export const CartContextProvider = ({ children }) => {
       itemsOutStock.forEach((itemOutStock) => {
         if (item.id === itemOutStock.id) item.quantity[itemOutStock.index] = 0
       })
-      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0) { cart.splice(cart.indexOf(item), 1) }
+      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0) {
+        cart.splice(cart.indexOf(item), 1)
+      }
     })
     setCart([...cart])
   }

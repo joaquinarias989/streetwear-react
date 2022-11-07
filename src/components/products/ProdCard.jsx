@@ -26,15 +26,15 @@ const ProdCard = memo(({ prod }) => {
   }
 
   return (
-    <article className="product__card">
-      {prod.price < 5000 && <span className="offer">GANGA!</span>}
+    <article className='product__card'>
+      {prod.price < 5000 && <span className='offer'>GANGA!</span>}
       <Link to={`/Productos/${prod.id}`}>
-        <div className="product__card__img">
-          <img src={prod.img} alt="Imagen del producto" loading="lazy" />
+        <div className='product__card__img'>
+          <img src={prod.img} alt='Imagen del producto' loading='lazy' />
         </div>
-        <div className="product__card__info">
-          <h4 className="product__card__title">{prod.title}</h4>
-          <h4 className="product__card__price">$ {prod.price}</h4>
+        <div className='product__card__info'>
+          <h4 className='product__card__title'>{prod.title}</h4>
+          <h4 className='product__card__price'>$ {prod.price}</h4>
         </div>
       </Link>
 

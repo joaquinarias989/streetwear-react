@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { getProducts } from '../services/products'
 // import Swal from 'sweetalert2'
 
-function useProducts (id, category) {
+function useProducts(id, category) {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadingMoreProds, setLoadingMoreProds] = useState(false)
@@ -18,7 +18,9 @@ function useProducts (id, category) {
           setProducts(resp.data)
         } else {
           if (id) navigate('/404')
-          else { setMessage(resp.message) }
+          else {
+            setMessage(resp.message)
+          }
         }
       })
       .catch(() => setMessage('Algo salió mal. Por favor, intenta nuevamente'))
