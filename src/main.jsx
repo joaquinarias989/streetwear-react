@@ -6,7 +6,7 @@ import './bootstrap.css'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <BrowserRouter basename="/">
+  <BrowserRouter basename='/'>
     <React.StrictMode>
       <App />
     </React.StrictMode>
