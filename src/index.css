@@ -1,9 +1,9 @@
 /*    FONTS   */
-@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap');
 /*   NORMALIZE   */
 * {
-  font-family: "Urbanist", sans-serif;
+  font-family: 'Urbanist', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -194,7 +194,7 @@ select:-webkit-autofill:focus {
 .title-underlined::before,
 .text-underlined::before,
 .text-overline::before {
-  content: "";
+  content: '';
   position: absolute;
   width: 100%;
   background: #ffda07;
@@ -262,7 +262,7 @@ select:-webkit-autofill:focus {
 
 .text-leftline::before {
   position: absolute;
-  content: "";
+  content: '';
   width: 5px;
   height: 40px;
   background: #ffda07;
@@ -330,18 +330,7 @@ select:-webkit-autofill:focus {
   background: #ed6161;
 }
 .clip-path {
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 100%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 100%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 /*     FORMS    */
 .form__paper {
@@ -415,7 +404,7 @@ select:-webkit-autofill:focus {
   z-index: 0;
 }
 .product__card__info .product__card__title::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: 3px;
   left: 0;
@@ -538,18 +527,7 @@ select:-webkit-autofill:focus {
   transform: translateX(-50%) translateY(-50%);
   background-color: #fff;
   padding: 3rem;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 97%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 97%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 .modal-alert i {
   font-size: 2em;
@@ -615,7 +593,7 @@ header .navbar-nav .menu__link {
   position: relative;
 }
 header .navbar-nav .menu__link::after {
-  content: "";
+  content: '';
   position: absolute;
   height: 0;
   width: 3px;
@@ -631,7 +609,7 @@ header .navbar-nav .menu__link:not(.menu__link--active):hover::after {
   background: #ffda07;
 }
 header .navbar-nav .menu__link--active::after {
-  content: "";
+  content: '';
   position: absolute;
   background-color: #ffda07;
   height: 3px;
@@ -672,18 +650,7 @@ header .navbar-nav .dropdown-link .sub-menu {
   left: -2rem;
   padding: 0 1rem 0 0.5rem;
   border-bottom: 5px solid #ffda07;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 90%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 90%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
   transition: all 0.3s ease-in-out;
 }
 header .navbar-nav .dropdown-link .sub-menu__categories {
@@ -716,18 +683,7 @@ header .cart__resume__nav {
   border-bottom: 0.8rem solid #ffda07;
   opacity: 0;
   visibility: hidden;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 100%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 100%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
   transition: all 0.3s ease-in-out;
   font-size: 0.9em;
 }
@@ -765,7 +721,7 @@ header .cart__resume__nav .cart__subtotal span {
   position: relative;
 }
 header .cart__resume__nav .cart__subtotal::before {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
   top: -2rem;
@@ -814,7 +770,7 @@ header .cart__resume__nav .cart__subtotal::before {
   font-weight: bold;
 }
 .footer__info::after {
-  content: "";
+  content: '';
   background: #5f5f5f7c;
   width: 90%;
   height: 2px;
@@ -941,18 +897,7 @@ main.bg-bricks {
   box-shadow: 10px 10px 8px #1f1f1f7e;
   border-radius: 2px;
   line-height: 1.8em;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 97%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 97%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 .help__content .help__list .d-flex {
   align-items: center;
@@ -960,7 +905,7 @@ main.bg-bricks {
   gap: 1rem;
 }
 .help__content .help__list .d-flex span {
-  font-family: "Hammersmith One", sans-serif;
+  font-family: 'Hammersmith One', sans-serif;
   flex-basis: 15%;
   font-weight: bold;
   position: relative;
@@ -969,7 +914,7 @@ main.bg-bricks {
   font-size: 1.9em;
 }
 .help__content .help__list .d-flex span::after {
-  content: "";
+  content: '';
   height: 6px;
   width: 50%;
   background: #ffda07;
@@ -998,18 +943,7 @@ main.bg-bricks {
     grid-template-rows: repeat(6, 1fr);
     grid-row-gap: 0;
     margin: 0;
-    clip-path: polygon(
-      5% 0%,
-      99% 0,
-      100% 17%,
-      99% 56%,
-      100% 97%,
-      80% 100%,
-      1% 100%,
-      0 59%,
-      0 25%,
-      0 1%
-    );
+    clip-path: polygon(5% 0%, 99% 0, 100% 17%, 99% 56%, 100% 97%, 80% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
   }
 }
 @media (max-width: 425px) {
@@ -1039,34 +973,12 @@ main.bg-bricks {
   background: rgba(255, 255, 255, 0.961);
   padding: 3rem 5rem;
   box-shadow: 10px 10px 8px #1f1f1f7e;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 97%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 97%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 @media (max-width: 767px) {
   .about__content .accordion__paper {
     padding: 3rem;
-    clip-path: polygon(
-      0% 0,
-      99% 0,
-      100% 0%,
-      99% 56%,
-      100% 97%,
-      93% 100%,
-      1% 100%,
-      0 59%,
-      0 25%,
-      0 1%
-    );
+    clip-path: polygon(0% 0, 99% 0, 100% 0%, 99% 56%, 100% 97%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
   }
 }
 .about__content .accordion__paper h3 {
@@ -1127,18 +1039,10 @@ main.bg-bricks {
 .contact__form .form__paper {
   flex-basis: 100%;
   position: relative;
-  clip-path: polygon(
-    94% 0,
-    100% 8%,
-    100% 100%,
-    97% 100%,
-    0 100%,
-    0.5% 60%,
-    0 0
-  );
+  clip-path: polygon(94% 0, 100% 8%, 100% 100%, 97% 100%, 0 100%, 0.5% 60%, 0 0);
 }
 .contact__form .form__paper::before {
-  content: "";
+  content: '';
   position: absolute;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3), -1px 1px 1px rgba(0, 0, 0, 0.2);
   border-color: #fffffff5 #fffffff5;
@@ -1201,7 +1105,7 @@ main.bg-bricks {
   border-radius: 1px;
 }
 .contact__location .iframe__box::before {
-  content: "";
+  content: '';
   position: absolute;
   background: rgba(255, 218, 7, 0.958);
   width: 13rem;
@@ -1211,7 +1115,7 @@ main.bg-bricks {
   transform: rotate(-40deg);
 }
 .contact__location .iframe__box::after {
-  content: "";
+  content: '';
   position: absolute;
   background: rgba(255, 218, 7, 0.958);
   width: 13rem;
@@ -1221,7 +1125,7 @@ main.bg-bricks {
   transform: rotate(40deg);
 }
 .contact__location .iframe__box span::before {
-  content: "";
+  content: '';
   position: absolute;
   background: rgba(255, 218, 7, 0.958);
   width: 13rem;
@@ -1231,7 +1135,7 @@ main.bg-bricks {
   transform: rotate(40deg);
 }
 .contact__location .iframe__box span::after {
-  content: "";
+  content: '';
   position: absolute;
   background: rgba(255, 218, 7, 0.958);
   width: 13rem;
@@ -1261,7 +1165,7 @@ main.bg-bricks {
   margin-right: 0.5rem;
 }
 .section__header .breadcrumb li:not(:last-child)::after {
-  content: ">";
+  content: '>';
   position: relative;
   right: -0.5rem;
 }
@@ -1326,7 +1230,7 @@ main.bg-bricks {
   padding: 0 0.7rem;
 }
 .product__header h3 i span::before {
-  content: "";
+  content: '';
   position: absolute;
   background: #157097;
   width: 100%;
@@ -1362,7 +1266,7 @@ main.bg-bricks {
   margin-bottom: 4rem;
 }
 .product__main .product__details .product__description::after {
-  content: "";
+  content: '';
   width: 60%;
   background: #c6c6c6;
   height: 3px;
@@ -1491,7 +1395,7 @@ main.bg-bricks {
 .cart__data .cart__fact .checkbox__box {
   position: relative;
 }
-.cart__data .cart__fact .checkbox__box input[type="checkbox"] {
+.cart__data .cart__fact .checkbox__box input[type='checkbox'] {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -1499,7 +1403,7 @@ main.bg-bricks {
   min-width: 1em;
 }
 @media (max-width: 767px) {
-  .cart__data .cart__fact .checkbox__box input[type="checkbox"] {
+  .cart__data .cart__fact .checkbox__box input[type='checkbox'] {
     position: initial;
   }
 }
@@ -1535,18 +1439,7 @@ main.bg-bricks {
   min-width: 11rem;
   height: 15rem;
   position: relative;
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 100%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 100%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 .cart__resume__products .cart__product .cart__product__img img {
   width: 100%;
@@ -1582,10 +1475,7 @@ main.bg-bricks {
   display: block;
   font-size: 1.35em;
 }
-.cart__resume__products
-  .cart__product
-  .cart__product__info
-  .cart__product__quantity {
+.cart__resume__products .cart__product .cart__product__info .cart__product__quantity {
   font-weight: bold;
 }
 .cart__resume__products .cart__product .cart__product__info .btn-group {
@@ -1594,19 +1484,11 @@ main.bg-bricks {
 .cart__resume__products .cart__product .cart__product__info .btn-group button {
   padding: 0.8rem 1rem;
 }
-.cart__resume__products
-  .cart__product
-  .cart__product__info
-  .btn-group
-  button.btn-secundario {
+.cart__resume__products .cart__product .cart__product__info .btn-group button.btn-secundario {
   background-color: #157097;
   color: #fff;
 }
-.cart__resume__products
-  .cart__product
-  .cart__product__info
-  .btn-group
-  button.btn-secundario:hover {
+.cart__resume__products .cart__product .cart__product__info .btn-group button.btn-secundario:hover {
   background-color: #67a6c1;
   color: #000;
 }
@@ -1674,18 +1556,7 @@ main.bg-bricks {
 }
 .login .form__paper,
 .register .form__paper {
-  clip-path: polygon(
-    50% 0,
-    99% 0,
-    100% 17%,
-    99% 56%,
-    100% 97%,
-    93% 100%,
-    1% 100%,
-    0 59%,
-    0 25%,
-    0 1%
-  );
+  clip-path: polygon(50% 0, 99% 0, 100% 17%, 99% 56%, 100% 97%, 93% 100%, 1% 100%, 0 59%, 0 25%, 0 1%);
 }
 .login .form__paper .input__box,
 .register .form__paper .input__box {
@@ -1774,8 +1645,7 @@ main.bg-bricks {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: radial-gradient(farthest-side, #ffda07 94%, #0000) top/9px 9px
-      no-repeat,
+  background: radial-gradient(farthest-side, #ffda07 94%, #0000) top/9px 9px no-repeat,
     conic-gradient(#0000 30%, #ffda07);
   mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
@@ -1784,8 +1654,7 @@ main.bg-bricks {
 .spinner-sm {
   width: 24px;
   height: 24px;
-  background: radial-gradient(farthest-side, #ffda07 94%, #0000) top/5px 5px
-      no-repeat,
+  background: radial-gradient(farthest-side, #ffda07 94%, #0000) top/5px 5px no-repeat,
     conic-gradient(#0000 30%, #ffda07);
   mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);
   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 4px), #000 0);

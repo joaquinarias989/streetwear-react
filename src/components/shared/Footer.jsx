@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom'
 import Swal from 'sweetalert2'
 
-function Footer () {
+function Footer() {
   const scrollTop = () => window.scrollTo(0, 0)
 
-  const handleShare = e => {
+  const handleShare = (e) => {
     e.preventDefault()
     navigator.clipboard.writeText(window.location.href)
 
@@ -57,7 +57,7 @@ function Footer () {
           <a href='https://www.twitter.com' target='_blank' aria-label='Twitter' rel='noreferrer'>
             <i className='fab fa-twitter'></i>
           </a>
-          <a href='#!' target='_blank' aria-label='Compartir' onClick={e => handleShare(e)}>
+          <a href='#!' target='_blank' aria-label='Compartir' onClick={(e) => handleShare(e)}>
             <i className='fa fa-share'></i>
           </a>
         </div>
