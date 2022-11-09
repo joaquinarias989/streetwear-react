@@ -32,6 +32,10 @@ export const UserContextProvider = ({ children }) => {
           if (pathname === '/Cuenta') navigate('/Ingresar')
         }
       })
+      .catch(() => {
+        setUser(null)
+        if (pathname === '/Cuenta') navigate('/Ingresar')
+      })
       .finally(() => setLoadingUser(false))
   }, [])
 
