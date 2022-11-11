@@ -73,9 +73,9 @@ const CartForm = () => {
     //   })
     // }
 
-    clearCart()
-    e.target.reset()
-    setLoading(false)
+    // clearCart()
+    // e.target.reset()
+    // setLoading(false)
 
     // return MySwal.fire({
     //   title: <h2>Compra realizada exitosamente!</h2>,

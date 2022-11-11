@@ -26,18 +26,18 @@ function Account() {
             <div className='col-md-6'>
               <h2 className='text-underlined position-relative d-inline pe-5'>Datos Personales:</h2>
               <ul className='mt-3'>
-                <li>{user.name}</li>
-                <li>{user.email}</li>
-                <li>Teléfono: {user.phone}</li>
+                <li>{user?.name}</li>
+                <li>{user?.email}</li>
+                <li>Teléfono: {user?.phone}</li>
               </ul>
             </div>
             <div className='col-md-6'>
               <h2 className='text-underlined position-relative d-inline pe-5'>Direcciones:</h2>
               <ul className='mt-3'>
                 <li>
-                  {user.province} {user.postalCode}
+                  {user?.province} {user?.postalCode}
                 </li>
-                <li>{user.address}</li>
+                <li>{user?.address}</li>
               </ul>
             </div>
           </div>

@@ -26,9 +26,11 @@ export const UserContextProvider = ({ children }) => {
       .then((resp) => {
         if (resp.success) {
           setUser(resp.data)
+          localStorage.setItem('userId', resp.data.id)
           if (pathname === '/Ingresar') navigate('/Cuenta')
         } else {
           setUser(null)
+          localStorage.removeItem('userId')
           if (pathname === '/Cuenta') navigate('/Ingresar')
         }
       })
@@ -88,6 +90,7 @@ export const UserContextProvider = ({ children }) => {
     LogoutUser()
       .then((resp) => {
         if (resp.success) {
+          if (pathname === '/Cuenta') navigate('/Ingresar')
           Swal.fire({
             title: `Hasta pronto ${user.name}!`,
             showConfirmButton: false,
