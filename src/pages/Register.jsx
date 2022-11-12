@@ -66,6 +66,19 @@ function Register() {
                   </label>
                   <input type='password' id='password' name='password' className='form__input' required />
                 </div>
+                <div className='input__box'>
+                  <label htmlFor='avatar' className='form__label'>
+                    Avatar
+                  </label>
+                  <input
+                    type='file'
+                    id='avatar'
+                    name='avatar'
+                    className='form__input'
+                    accept='image/jpeg, image/jpg, image/png, image/svg'
+                    required
+                  />
+                </div>
                 {loadingUser ? (
                   <button type='button' className='btn-principal' disabled>
                     <i className='fa-solid fa-spinner'></i> Creando Cuenta...

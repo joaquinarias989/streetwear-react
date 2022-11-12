@@ -3,6 +3,9 @@ import { NavLink, Link } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
 import Loading from '../components/shared/Loading'
 
+const URI_API_IMAGES = 'http://localhost:8080/api/uploads/image'
+const DEFAULT_IMAGE = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
+
 function Account() {
   const { loadingUser, user } = useContext(UserContext)
 
@@ -25,11 +28,21 @@ function Account() {
           <div className='row justify-content-between mb-5'>
             <div className='col-md-6'>
               <h2 className='text-underlined position-relative d-inline pe-5'>Datos Personales:</h2>
-              <ul className='mt-3'>
-                <li>{user?.name}</li>
-                <li>{user?.email}</li>
-                <li>Teléfono: {user?.phone}</li>
-              </ul>
+              <div className='d-flex align-items-center gap-5'>
+                <picture>
+                  <img
+                    src={user ? `${URI_API_IMAGES}/${user?.avatar}` : DEFAULT_IMAGE}
+                    alt={`Imágen del Usuario ${user?.name}`}
+                    className='rounded-2 border border-2 border-primary'
+                    style={{ maxWidth: '6.5rem' }}
+                  />
+                </picture>
+                <ul className='mt-3'>
+                  <li>{user?.name}</li>
+                  <li>{user?.email}</li>
+                  <li>Teléfono: {user?.phone}</li>
+                </ul>
+              </div>
             </div>
             <div className='col-md-6'>
               <h2 className='text-underlined position-relative d-inline pe-5'>Direcciones:</h2>

@@ -63,7 +63,7 @@ export async function GetUserAuthenticated() {
   return resp
 }
 
-export async function LogoutUser(username, password) {
+export async function LogoutUser() {
   const resp = new ServiceResponse()
 
   await axios({
@@ -97,9 +97,19 @@ export async function LogoutUser(username, password) {
 export async function SignUpUser(newUser) {
   const resp = new ServiceResponse()
 
+  const formData = new FormData()
+  formData.append('name', newUser.name)
+  formData.append('province', newUser.province)
+  formData.append('postalCode', newUser.postalCode)
+  formData.append('address', newUser.address)
+  formData.append('phone', newUser.phone)
+  formData.append('email', newUser.email)
+  formData.append('password', newUser.password)
+  formData.append('avatar', newUser.avatar)
   await axios({
     method: 'POST',
-    data: newUser,
+    headers: { 'Content-Type': 'multipart/form-data' },
+    data: formData,
     withCredentials: true,
     url: `${URI_API}/auth/signUp`
   })
@@ -117,7 +127,7 @@ export async function SignUpUser(newUser) {
       if (!err.response.data.success) {
         resp.message = err.response.data.message
       } else {
-        resp.message = 'Algo salio mal. Por favor, intente nuevamente.'
+        resp.message = 'Algo salió mal. Por favor, intente nuevamente.'
       }
     })
 

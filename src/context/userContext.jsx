@@ -90,16 +90,17 @@ export const UserContextProvider = ({ children }) => {
     LogoutUser()
       .then((resp) => {
         if (resp.success) {
+          setUser(null)
+          localStorage.removeItem('userId')
           if (pathname === '/Cuenta') navigate('/Ingresar')
           Swal.fire({
-            title: `Hasta pronto ${user.name}!`,
+            title: resp.message,
             showConfirmButton: false,
             showCloseButton: true,
             timer: 3000,
             timerProgressBar: true,
             icon: 'success'
           })
-          setUser(null)
         } else {
           Swal.fire({
             title: 'Algo salió mal',
@@ -128,7 +129,7 @@ export const UserContextProvider = ({ children }) => {
     e.preventDefault()
     setLoadingUser(true)
 
-    const { name, province, postalCode, address, phone, email, password } = e.target.elements
+    const { name, province, postalCode, address, phone, email, password, avatar } = e.target.elements
 
     SignUpUser({
       name: name.value,
@@ -138,7 +139,7 @@ export const UserContextProvider = ({ children }) => {
       phone: phone.value,
       email: email.value,
       password: password.value,
-      avatar: 'das2t5421t2151441'
+      avatar: avatar.files[0]
     })
       .then((resp) => {
         if (resp.success) {
