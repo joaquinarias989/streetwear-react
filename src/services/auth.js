@@ -16,7 +16,6 @@ export async function LoginUser(email, password) {
     url: `${URI_API}/auth/login`
   })
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         resp.success = false
       } else {
@@ -43,7 +42,6 @@ export async function GetUserAuthenticated() {
 
   await axios({ method: 'GET', withCredentials: true, url: `${URI_API}/auth/user-logued` })
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         resp.success = false
       } else {
@@ -72,7 +70,6 @@ export async function LogoutUser() {
     url: `${URI_API}/auth/logout`
   })
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         resp.success = false
       } else {
@@ -114,7 +111,6 @@ export async function SignUpUser(newUser) {
     url: `${URI_API}/auth/signUp`
   })
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         resp.success = false
       } else {
