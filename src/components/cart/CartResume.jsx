@@ -6,17 +6,20 @@ import CartItem from './CartItem'
 const CartResume = ({ type }) => {
   const { cart, ship, clearCart, subtotalPrice, totalPrice } = useContext(CartContext)
 
-  return cart.length < 1 ? (
-    <div className='text-center'>
-      <h2>El carrito está vacío!</h2>
-      <Link to={'/Productos'} className='position-relative px-3 text-underlined mt-2'>
-        Ver productos disponibles
-      </Link>
-    </div>
-  ) : type === 'page' ? (
+  if (cart === null || cart.products?.length < 1)
+    return (
+      <div className='text-center'>
+        <h2>El carrito está vacío!</h2>
+        <Link to={'/Productos'} className='position-relative px-3 text-underlined mt-2'>
+          Ver productos disponibles
+        </Link>
+      </div>
+    )
+
+  return type === 'page' ? (
     <>
       <div className='cart__resume__products flex-column'>
-        {cart.map((item) => (
+        {cart?.products?.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </div>
@@ -39,7 +42,7 @@ const CartResume = ({ type }) => {
   ) : (
     <>
       <div className='cart__resume__products flex-column'>
-        {cart.map((item) => (
+        {cart?.products?.map((item) => (
           <CartItem key={item.id} item={item} />
         ))}
       </div>

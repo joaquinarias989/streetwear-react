@@ -1,11 +1,13 @@
 import { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import Swal from 'sweetalert2'
 import { CartContext } from '../../context/cartContext'
 import { UserContext } from '../../context/userContext'
+import { PurchaseOrder } from '../../services/orders'
 import Loading from '../shared/Loading'
 
 const CartForm = () => {
-  const { cart, ship, totalPrice, clearCart, removeProdsOutStock } = useContext(CartContext)
+  const { cart, ship, clearCartOnPurchase } = useContext(CartContext)
   const { loadingUser, user } = useContext(UserContext)
   const [loading, setLoading] = useState(false)
 
@@ -13,85 +15,46 @@ const CartForm = () => {
     e.preventDefault()
     setLoading(true)
 
-    // const prodsOutOfStock = await verifyStock(cart)
-    // if (prodsOutOfStock.length > 0) {
-    //   removeProdsOutStock(prodsOutOfStock)
-    //   setLoading(false)
+    const { name, email, postalCode, province, address, department, phone, dni } = e.target.elements
 
-    //   return MySwal.fire({
-    //     title: <h2>No pudimos avanzar con tu compra</h2>,
-    //     html: (
-    //       <>
-    //         <p>No tenemos suficiente stock de los siguientes productos:</p>
-    //         {prodsOutOfStock.map((p) => (
-    //           <i key={p.id} className="d-block">
-    //             <span className="fw-bold">{p.title}</span>, Talle:{' '}
-    //             <span className="fw-bold">{p.size}</span>
-    //           </i>
-    //         ))}
-    //         <p>
-    //           Los hemos eliminado del carrito para facilitarle las cosas, probá
-    //           agregarlos nuevamente y verificá!
-    //         </p>
-    //       </>
-    //     ),
-    //     icon: 'error'
-    //   })
-    // }
+    const buyer = {
+      name: name.value,
+      email: email.value,
+      postalCode: postalCode.value,
+      province: province.value,
+      address: `${address.value}, ${department.value}`,
+      phone: phone.value,
+      document: dni.value
+    }
+    await PurchaseOrder(cart._id, buyer)
+      .then((resp) => {
+        if (resp.success) {
+          Swal.fire({
+            title: resp.message.split('!')[0],
+            text: resp.message.split('!')[1],
+            confirmButtonText: 'Listo',
+            icon: 'success'
+          })
+          clearCartOnPurchase()
+        } else {
+          Swal.fire({
+            title: resp.message.includes('existe') ? 'Ya haz realizado la compra de este Carrito' : resp.message,
+            confirmButtonText: 'Aceptar',
+            icon: 'error'
+          })
+        }
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
+        })
+      )
 
-    // const order = {
-    //   buyer: {
-    //     name: e.target.elements.name.value,
-    //     email: e.target.elements.email.value,
-    //     postalCode: e.target.elements.postalcode.value,
-    //     province: e.target.elements.province.value,
-    //     address: e.target.elements.address.value,
-    //     department: e.target.elements.department.value,
-    //     phone: e.target.elements.phone.value,
-    //     dni: e.target.elements.dni.value
-    //   },
-    //   items: cart.map((item) => ({
-    //     id: item.id,
-    //     title: item.title,
-    //     price: item.price,
-    //     quantity: item.quantity,
-    //     img: item.img,
-    //     size: item.size,
-    //     color: item.color
-    //   })),
-    //   total: totalPrice,
-    //   date: new Date()
-    // }
-    // const resp = await createOrder(order, cart)
-    // if (resp === 'Algo salió mal') {
-    //   setLoading(false)
-
-    //   return MySwal.fire({
-    //     title: <h2>{resp}</h2>,
-    //     text: 'Por favor, intenta nuevamente',
-    //     icon: 'error'
-    //   })
-    // }
-
-    // clearCart()
-    // e.target.reset()
-    // setLoading(false)
-
-    // return MySwal.fire({
-    //   title: <h2>Compra realizada exitosamente!</h2>,
-    //   html: (
-    //     <>
-    //       <strong>Cód. de Transaccion: </strong>
-    //       <i>#{resp}</i>
-    //       <p className="text-muted">
-    //         (Te recomendamos guardar éste codigo ya que puede servirte ante
-    //         cualquier inconveniente)
-    //       </p>
-    //     </>
-    //   ),
-    //   confirmButtonText: 'Listo',
-    //   icon: 'success'
-    // })
+    e.target.reset()
+    setLoading(false)
   }
 
   return (

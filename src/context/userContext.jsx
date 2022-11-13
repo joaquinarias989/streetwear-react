@@ -15,7 +15,7 @@ export const UserContext = createContext({})
 // })
 
 export const UserContextProvider = ({ children }) => {
-  const [user, setUser] = useState({})
+  const [user, setUser] = useState(null)
   const [loadingUser, setLoadingUser] = useState(false)
   const { pathname } = useLocation()
   const navigate = useNavigate()
@@ -26,18 +26,13 @@ export const UserContextProvider = ({ children }) => {
       .then((resp) => {
         if (resp.success) {
           setUser(resp.data)
-          localStorage.setItem('userId', resp.data.id)
-          if (pathname === '/Ingresar') navigate('/Cuenta')
+          pathname === '/Ingresar' && navigate('/Cuenta')
         } else {
           setUser(null)
-          localStorage.removeItem('userId')
-          if (pathname === '/Cuenta') navigate('/Ingresar')
+          pathname === '/Cuenta' && navigate('/Ingresar')
         }
       })
-      .catch(() => {
-        setUser(null)
-        if (pathname === '/Cuenta') navigate('/Ingresar')
-      })
+      .catch(() => setUser(null))
       .finally(() => setLoadingUser(false))
   }, [])
 
@@ -51,22 +46,21 @@ export const UserContextProvider = ({ children }) => {
         if (resp.success) {
           setUser(resp.data)
 
-          return Swal.fire({
-            title: `Bienvenido de vuelta ${resp.data.name}`,
-            text: '¡Has iniciado sesión correctamente! Serás redireccionado en unos segundos',
+          Swal.fire({
+            title: `Bienvenido de vuelta ${resp.data.name}!`,
+            toast: true,
             icon: 'success',
+            position: 'top-end',
             showConfirmButton: false,
-            showCloseButton: true,
+            showCloseButton: false,
             timer: 3500,
             timerProgressBar: true
-          }).then(() => {
-            setLoadingUser(false)
-            navigate('/Cuenta')
           })
+          navigate('/Cuenta')
         } else {
-          return Swal.fire({
-            title: 'Usuario y/o contraseña incorrectos',
-            text: 'Por favor, verifica las credenciales.',
+          Swal.fire({
+            title: resp.message,
+            text: 'Por favor, verifica los datos ingresados.',
             confirmButtonText: 'Aceptar',
             icon: 'error'
           })
@@ -74,7 +68,7 @@ export const UserContextProvider = ({ children }) => {
       })
       .catch(() =>
         Swal.fire({
-          title: 'Algo salio mal',
+          title: 'Algo salió mal',
           text: 'Por favor, intenta nuevamente.',
           confirmButtonText: 'Aceptar',
           icon: 'error'
@@ -89,36 +83,23 @@ export const UserContextProvider = ({ children }) => {
 
     LogoutUser()
       .then((resp) => {
-        if (resp.success) {
-          setUser(null)
-          localStorage.removeItem('userId')
-          if (pathname === '/Cuenta') navigate('/Ingresar')
-          Swal.fire({
-            title: resp.message,
-            showConfirmButton: false,
-            showCloseButton: true,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: 'success'
-          })
-        } else {
-          Swal.fire({
-            title: 'Algo salió mal',
-            text: 'Por favor, intenta nuevamente.',
-            confirmButtonText: 'Aceptar',
-            icon: 'error'
-          })
-        }
-      })
-      .catch(() =>
+        setUser(null)
         Swal.fire({
-          title: 'Algo salio mal',
-          text: 'Por favor, intenta nuevamente.',
-          confirmButtonText: 'Aceptar',
-          icon: 'error'
+          toast: true,
+          position: 'top-end',
+          title: resp.message,
+          showConfirmButton: false,
+          showCloseButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          icon: resp.message.includes('vencido') ? 'error' : 'success'
         })
-      )
-      .finally(() => setLoadingUser(false))
+      })
+      .catch(() => setUser(null))
+      .finally(() => {
+        setLoadingUser(false)
+        if (pathname === '/Cuenta') navigate('/Ingresar')
+      })
   }
 
   const handleRecover = async (e) => {
@@ -131,7 +112,7 @@ export const UserContextProvider = ({ children }) => {
 
     const { name, province, postalCode, address, phone, email, password, avatar } = e.target.elements
 
-    SignUpUser({
+    const newUser = {
       name: name.value,
       province: province.value,
       postalCode: parseInt(postalCode.value),
@@ -140,27 +121,25 @@ export const UserContextProvider = ({ children }) => {
       email: email.value,
       password: password.value,
       avatar: avatar.files[0]
-    })
+    }
+
+    SignUpUser(newUser)
       .then((resp) => {
         if (resp.success) {
           setUser(resp.data)
 
-          return Swal.fire({
+          Swal.fire({
             title: `Bienvenido ${resp.data.name}!`,
             text: 'Tu cuenta ha sido creada correctamente!',
             icon: 'success',
             showConfirmButton: false,
-            showCloseButton: true,
             timer: 3500,
             timerProgressBar: true
-          }).then(() => {
-            setLoadingUser(false)
-            navigate('/Cuenta')
           })
+          navigate('/Cuenta')
         } else {
           Swal.fire({
-            title: 'Algo salio mal',
-            text: 'Por favor, intenta nuevamente.',
+            text: resp.message,
             confirmButtonText: 'Aceptar',
             icon: 'error'
           })
@@ -168,7 +147,7 @@ export const UserContextProvider = ({ children }) => {
       })
       .catch(() =>
         Swal.fire({
-          title: 'Algo salio mal',
+          title: 'Algo salió mal',
           text: 'Por favor, intenta nuevamente.',
           confirmButtonText: 'Aceptar',
           icon: 'error'

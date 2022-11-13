@@ -22,7 +22,7 @@ function Cart() {
         </div>
       </div>
       <div className='row justify-content-between w-100'>
-        {cart.length < 1 ? (
+        {cart === null || cart.products?.length < 1 ? (
           <div className='spinner-container'>
             <h2>El carrito está vacío!</h2>
             <Link to={'/Productos'} className='position-relative px-3 text-underlined mt-2'>

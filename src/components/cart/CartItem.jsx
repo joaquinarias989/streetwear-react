@@ -3,13 +3,17 @@ import { Link } from 'react-router-dom'
 import { CartContext } from '../../context/cartContext'
 
 const CartItem = ({ item }) => {
-  const { addOne, reduceOne, removeProd } = useContext(CartContext)
+  const { addToCart, removeProd, removeProdSize } = useContext(CartContext)
+
+  const handleAddOneToCart = async (size) => {
+    await addToCart(item.id, size, 1)
+  }
 
   return (
     <div className='cart__product' key={item.id}>
       <div className='cart__product__img'>
-        <img src={item.img} alt={`Imagen del producto ${item.title}`} loading='lazy' />
-        <button type='button' onClick={() => removeProd(item, undefined)}>
+        <img src={item.urlImg} alt={`Imagen del producto ${item.title}`} loading='lazy' />
+        <button type='button' onClick={() => removeProd(item.id)}>
           <i className='fa fa-trash'></i>
         </button>
       </div>
@@ -20,35 +24,40 @@ const CartItem = ({ item }) => {
             <Link to={`/Productos/${item.id}`}>{item.title}</Link>
           </h3>
           <div className='flex-column gap-2'>
-            {item.size.map((size) => {
-              const indexSize = item.size.indexOf(size)
+            {item.sizes.map((size) => {
+              const indexSize = item.sizes.indexOf(size)
 
-              return item.quantity[indexSize] === 0 ? null : (
+              return item.quantities[indexSize] === 0 ? null : (
                 <div className='d-flex algn-items-center jc-between gap-1' key={size}>
                   <p>
                     Talle <strong>{size}</strong>,{' '}
                     <span className='cart__product__quantity px-2'>
-                      <strong>{item.quantity[indexSize]}</strong>
+                      <strong>{item.quantities[indexSize]}</strong>
                     </span>
                     Unidades
                   </p>
                   <div className='d-flex algn-items-center btn-group'>
-                    <button type='button' id='addOne' className='btn-principal' onClick={() => addOne(item, indexSize)}>
+                    <button
+                      type='button'
+                      id='addOne'
+                      className='btn-principal'
+                      onClick={() => handleAddOneToCart(size)}
+                    >
                       <i className='fa fa-plus'></i>
                     </button>
-                    <button
+                    {/* <button
                       type='button'
                       id='reduceOne'
                       className='btn-secundario'
                       onClick={() => reduceOne(item, indexSize)}
                     >
                       <i className='fa fa-minus'></i>
-                    </button>
+                    </button> */}
                     <button
                       type='button'
                       id='removeProd'
                       className='btn-remove'
-                      onClick={() => removeProd(item, indexSize)}
+                      onClick={() => removeProdSize(item.id, size)}
                     >
                       <i className='fa fa-trash'></i>
                     </button>

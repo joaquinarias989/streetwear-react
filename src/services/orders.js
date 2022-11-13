@@ -1,21 +1,20 @@
 import axios from 'axios'
 import ServiceResponse from '../models/ServiceResponse'
 
-const URI_API = 'http://localhost:8080/api/'
+const URI_API = 'http://localhost:8080/api'
 
-export async function PurchaseOrder(idCart, userEmail) {
+export async function PurchaseOrder(idCart, buyer) {
   const resp = new ServiceResponse()
 
-  let axiosConfig = {
+  const axiosConfig = {
     method: 'POST',
-    url: `${URI_API}/'orders`
+    url: `${URI_API}/orders`,
+    withCredentials: true,
+    data: { idCart: idCart.toString(), buyer }
   }
-
-  if (userEmail) axiosConfig = { ...axiosConfig, data: userEmail, withCredentials: true }
 
   await axios(axiosConfig)
     .then((res) => {
-      console.log(res)
       if (res.status !== 200) {
         resp.success = false
       } else {
@@ -31,8 +30,6 @@ export async function PurchaseOrder(idCart, userEmail) {
         resp.message = 'Algo salió mal. Por favor, intentá nuevamente.'
       }
     })
-
-  console.log(resp)
 
   return resp
 }

@@ -1,5 +1,12 @@
 import { createContext, useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
+import {
+  AddProductToCart,
+  ClearCart,
+  CreateCart,
+  DeleteProductFromCart,
+  DeleteProductSizeFromCart
+} from '../services/carts'
 
 export const CartContext = createContext([])
 
@@ -13,7 +20,7 @@ const Toast = Swal.mixin({
 })
 
 export const CartContextProvider = ({ children }) => {
-  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')) || [])
+  const [cart, setCart] = useState(JSON.parse(localStorage.getItem('cart')))
   const SHIP_VALUE = 475
 
   useEffect(() => {
@@ -25,144 +32,184 @@ export const CartContextProvider = ({ children }) => {
   }, [cart])
 
   // calculate total quantity of products in cart
-  const totalQuantity = cart
-    .map((item) => item.quantity.reduce((acc, cur) => acc + cur, 0))
+  const totalQuantity = cart?.products
+    .map((item) => item.quantities.reduce((acc, cur) => acc + cur, 0))
     .reduce((acc, cur) => acc + cur, 0)
 
   // calculate subtotal price of products in cart
-  const subtotalPrice = cart
-    .map((item) => item.price * item.quantity.reduce((acc, cur) => acc + cur, 0))
+  const subtotalPrice = cart?.products
+    .map((item) => item.price * item.quantities.reduce((acc, cur) => acc + cur, 0))
     .reduce((acc, cur) => acc + cur, 0)
 
   // calculate total price
   const totalPrice = subtotalPrice + SHIP_VALUE
 
-  const addToCart = (item, quantity, index) => {
-    const size = item.size[index]
+  const createCart = async () => {
+    let cartId = ''
 
-    if (quantity > item.stock[index]) {
-      return Toast.fire({
-        icon: 'error',
-        title: `No tenemos suficiente stock del producto en talle ${size}`,
-        timer: 3000
+    await CreateCart()
+      .then((resp) => {
+        if (resp.success) {
+          setCart(resp.data)
+          cartId = resp.data._id
+        } else {
+          Swal.fire({
+            text: resp.message,
+            confirmButtonText: 'Aceptar',
+            icon: 'error'
+          })
+        }
       })
-    }
-
-    // if prod exist in cart
-    const prod = cart.find((p) => p.id === item.id)
-    if (prod) {
-      if (prod.quantity[index] + quantity > item.stock[index]) {
-        return Toast.fire({
-          icon: 'error',
-          title: `No tenemos suficiente stock del producto en talle ${size}`
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
         })
-      }
-      prod.quantity[index] += quantity
-      item.quantity[index] = prod.quantity[index]
-      setCart([...cart])
-    } else {
-      // if prod not exist in cart
-      // fill item.quantity array whit 0s when item is added to cart for first time
-      for (let i = 0; i < item.size.length; i++) {
-        item.quantity[i] = 0
-      }
-      item.quantity[index] = quantity
-      setCart([...cart, item])
-    }
+      )
 
-    return Toast.fire({
-      icon: 'success',
-      title: `${item.title} (${quantity}) agregado exitosamente!`
+    return cartId
+  }
+
+  const addToCart = async (prodId, size, quantity) => {
+    Toast.fire({
+      didOpen: () => Swal.showLoading()
     })
-  }
 
-  const addOne = (item, index) => {
-    if (!cart.some((p) => p.id === item.id)) {
-      return Toast.fire({
-        icon: 'error',
-        title: 'El producto no se encuentra en el carrito'
-      })
-    }
-    if (item.quantity[index] >= item.stock[index]) {
-      return Toast.fire({
-        icon: 'error',
-        title: `No tenemos más stock del producto en talle ${item.size[index]}`
-      })
+    let cartId = ''
+    if (cart === null) {
+      cartId = await createCart()
     }
 
-    item.quantity[index]++
-    setCart([...cart])
-  }
-
-  const reduceOne = (item, index) => {
-    if (!cart.includes(item)) {
-      return Toast.fire({
-        icon: 'error',
-        title: 'El producto no se encuentra en el carrito'
+    await AddProductToCart(cartId !== '' ? cartId : cart._id, prodId, size, quantity)
+      .then((resp) => {
+        if (resp.success) {
+          setCart(resp.data)
+          Toast.fire({
+            icon: 'success',
+            title: resp.message
+          })
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: resp.message
+          })
+        }
       })
-    }
-    if (item.quantity[index] === 1) return removeProd(item, index)
-
-    item.quantity[index]--
-    setCart([...cart])
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
+        })
+      )
   }
 
-  const removeProd = (item, index) => {
-    if (index !== -1 && index !== undefined) {
-      item.quantity[index] = 0
-      if (item.quantity.reduce((acc, cur) => acc + cur, 0) > 0) {
-        return setCart([...cart])
-      }
-    }
+  const reduceOne = () => {}
 
-    return setCart(cart.filter((p) => p.id !== item.id))
-  }
-
-  const removeProdsOutStock = (itemsOutStock) => {
-    cart.forEach((item) => {
-      itemsOutStock.forEach((itemOutStock) => {
-        if (item.id === itemOutStock.id) item.quantity[itemOutStock.index] = 0
-      })
-      if (item.quantity.reduce((acc, cur) => acc + cur, 0) === 0) {
-        cart.splice(cart.indexOf(item), 1)
-      }
+  const removeProd = async (prodId) => {
+    Toast.fire({
+      didOpen: () => Swal.showLoading()
     })
-    setCart([...cart])
-  }
 
-  const clearCart = () => {
-    if (cart.length < 0) {
-      return Toast.fire({
-        icon: 'error',
-        title: 'El carrito no posee ningún producto'
+    await DeleteProductFromCart(cart._id, prodId)
+      .then((resp) => {
+        if (resp.success) {
+          setCart(resp.data)
+          Toast.fire({
+            icon: 'success',
+            title: resp.message
+          })
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: resp.message
+          })
+        }
       })
-    }
-
-    cart.forEach((prod) => delete prod.quantity)
-    setCart([])
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
+        })
+      )
   }
 
-  const updateProdQuantity = (item) => {
-    if (cart.some((p) => p.id === item.id)) {
-      const prod = cart.find((p) => p.id === item.id)
-      if (prod) {
-        return prod.quantity
-      }
-    }
+  const removeProdSize = async (prodId, size) => {
+    Toast.fire({
+      didOpen: () => Swal.showLoading()
+    })
 
-    return 0
+    await DeleteProductSizeFromCart(cart._id, prodId, size)
+      .then((resp) => {
+        if (resp.success) {
+          setCart(resp.data)
+          Toast.fire({
+            icon: 'success',
+            title: resp.message
+          })
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: resp.message
+          })
+        }
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
+        })
+      )
   }
+
+  const clearCart = async () => {
+    Toast.fire({
+      didOpen: () => Swal.showLoading()
+    })
+
+    await ClearCart(cart._id)
+      .then((resp) => {
+        if (resp.success) {
+          setCart(resp.data)
+          Toast.fire({
+            icon: 'success',
+            title: resp.message
+          })
+        } else {
+          Toast.fire({
+            icon: 'error',
+            title: resp.message
+          })
+        }
+      })
+      .catch(() =>
+        Swal.fire({
+          title: 'Algo salió mal',
+          text: 'Por favor, intenta nuevamente.',
+          confirmButtonText: 'Aceptar',
+          icon: 'error'
+        })
+      )
+  }
+
+  const clearCartOnPurchase = () => setCart(null)
 
   return (
     <CartContext.Provider
       value={{
         addToCart,
-        addOne,
         reduceOne,
         removeProd,
-        removeProdsOutStock,
+        removeProdSize,
         clearCart,
-        updateProdQuantity,
+        clearCartOnPurchase,
         cart,
         ship: SHIP_VALUE,
         subtotalPrice,
