@@ -31,20 +31,13 @@ function formatProdsFromAPI(data) {
     return [
       {
         ...data,
-        id: data._id,
-        img: data.urlImg,
-        category: 'Remeras',
-        quantity: [0]
+        category: 'Remeras'
       }
     ]
   }
 
   return data.map((item) => ({
     ...item,
-    id: item._id,
-    price: item.price,
-    img: item.urlImg,
-    category: 'REM',
-    quantity: [0]
+    category: 'Remeras'
   }))
 }

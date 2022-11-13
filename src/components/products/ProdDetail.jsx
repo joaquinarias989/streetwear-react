@@ -7,11 +7,12 @@ import ProdQuantity from '../products/ProdQuantity'
 
 const ProdDetail = ({ prod }) => {
   const [continueBuy, setContinueBuy] = useState(true)
-  const [sizeSelected, setSizeSelected] = useState(Array.prototype.indexOf())
+  const [sizeSelected, setSizeSelected] = useState('')
   const { addToCart } = useContext(CartContext)
+  const index = prod.sizes.indexOf(sizeSelected)
 
   const onAdd = (quantity) => {
-    if (sizeSelected === -1) {
+    if (index === -1) {
       return Swal.fire({
         icon: 'error',
         title: 'No seleccionaste el talle che!',
@@ -23,7 +24,7 @@ const ProdDetail = ({ prod }) => {
         timerProgressBar: true
       })
     }
-    addToCart(prod, quantity, sizeSelected)
+    addToCart(prod._id, sizeSelected, quantity)
     setContinueBuy(!continueBuy)
   }
 
@@ -64,13 +65,13 @@ const ProdDetail = ({ prod }) => {
           <div id='carouselProductImg' className='carousel slide' data-bs-ride='carousel'>
             <div className='carousel-inner'>
               <div className='carousel-item active'>
-                <img src={prod.img} className='d-block w-100' alt='' loading='lazy' />
+                <img src={prod.urlImg} className='d-block w-100' alt='' loading='lazy' />
               </div>
               <div className='carousel-item'>
-                <img src={prod.img} className='d-block w-100' alt='' loading='lazy' />
+                <img src={prod.urlImg} className='d-block w-100' alt='' loading='lazy' />
               </div>
               <div className='carousel-item'>
-                <img src={prod.img} className='d-block w-100' alt='' loading='lazy' />
+                <img src={prod.urlImg} className='d-block w-100' alt='' loading='lazy' />
               </div>
             </div>
             <button
@@ -109,12 +110,12 @@ const ProdDetail = ({ prod }) => {
               name='talle'
               className='w-100 ms-md-3 mt-3 mt-md-0'
               defaultValue={'Talle'}
-              onChange={(e) => setSizeSelected(prod.size.indexOf(e.target.value))}
+              onChange={(e) => setSizeSelected(e.target.value)}
             >
               <option value={'Talle'} disabled>
                 Talle
               </option>
-              {prod.size.map((size) => (
+              {prod.sizes.map((size) => (
                 <option key={size} value={size}>
                   {size}
                 </option>
@@ -139,7 +140,7 @@ const ProdDetail = ({ prod }) => {
               </Link>
             </div>
           ) : (
-            <ProdQuantity page={'detail'} stock={sizeSelected > -1 ? prod.stock[sizeSelected] : 1} onAdd={onAdd} />
+            <ProdQuantity page={'detail'} stock={index > -1 ? prod.stock[index] : 1} onAdd={onAdd} />
           )}
         </div>
       </div>

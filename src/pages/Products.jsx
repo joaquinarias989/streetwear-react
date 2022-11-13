@@ -4,15 +4,6 @@ import Loading from '../components/shared/Loading'
 import useProducts from '../hooks/useProducts'
 import ProductsList from '../components/products/ProductsList'
 
-// const Toast = Swal.mixin({
-//   toast: true,
-//   position: 'top-end',
-//   showConfirmButton: false,
-//   showCloseButton: true,
-//   timer: 2000,
-//   timerProgressBar: true
-// })
-
 const Products = () => {
   const { category } = useParams()
   const { products, loading, loadingMoreProds, handleLoadMoreProds } = useProducts(undefined, category)
