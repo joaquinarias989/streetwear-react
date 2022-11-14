@@ -1,7 +1,7 @@
 import axios from 'axios'
 import ServiceResponse from '../models/ServiceResponse'
 
-const URI_API = 'https://street-wear-ecommerce-api.herokuapp.com//api'
+const URI_API = 'https://street-wear-ecommerce-api.herokuapp.com/api'
 
 export async function getProducts({ id = undefined, category = undefined }) {
   const resp = new ServiceResponse()
