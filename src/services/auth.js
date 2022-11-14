@@ -1,7 +1,7 @@
 import axios from 'axios'
 import ServiceResponse from '../models/ServiceResponse'
 
-const URI_API = 'http://localhost:8080/api'
+const URI_API = 'https://street-wear-ecommerce-api.herokuapp.com//api'
 
 export async function LoginUser(email, password) {
   const resp = new ServiceResponse()

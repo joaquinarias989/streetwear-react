@@ -3,7 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { UserContext } from '../context/userContext'
 import Loading from '../components/shared/Loading'
 
-const URI_API_IMAGES = 'http://localhost:8080/api/uploads/image'
+const URI_API_IMAGES = 'https://street-wear-ecommerce-api.herokuapp.com//api/uploads/image'
 const DEFAULT_IMAGE = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png'
 
 function Account() {
